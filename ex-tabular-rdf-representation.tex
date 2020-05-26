@@ -1,0 +1,69 @@
+\begin{tabular}{|c|c|c|c|c|} \hline
+\textbf{?job} & \textbf{?emp1} & \textbf{?sal1} & \textbf{?emp2} & \textbf{?sal2} \\ \hline
+Manager  & e:B & \$4450 & e:C & \$4150\\ \hline
+Operator & e:G & \$2300 & e:D & \$2000 \\ \hline
+Operator & e:G & \$2300 & e:E & \$2000 \\ \hline
+Operator & e:G & \$2300 & e:F & \$2000 \\ \hline
+\end{tabular}
+\qquad
+\begin{tikzpicture}[level/.style={sibling distance=8mm/#1}, baseline=(current bounding box.center)] % baseline centralizes the table vertically
+
+\rdfnode{r}{$r$}{circle};
+\rdfnode{v1}{$v_1$}{above = 1.5 of r, circle};
+\rdfnode{v2}{$v_2$}{above right = 0.5 and 1.5 of r, circle};
+\rdfnode{v3}{$v_3$}{below right = 0.5 and 1.5 of r, circle};
+\rdfnode{v4}{$v_4$}{below = 1.5 of r, circle};
+
+\rdfnode{sal2v1}{\$4150}{right= of v1};
+\rdfnode{emp2v1}{e:C}{above= 0.1 of sal2v1};
+\rdfnode{sal1v1}{\$4450}{above= 0.1 of emp2v1};
+\rdfnode{emp1v1}{e:B}{above= 0.1 of sal1v1};
+\rdfnode{jobv1}{Manager}{above= 0.1 of emp1v1};
+\rdfedge{v1}{\textbf{?job}}{jobv1}{bend left = 45};
+\rdfedge{v1}{\textbf{?emp1}}{emp1v1}{, bend left = 30};
+\rdfedge{v1}{\textbf{?sal1}}{sal1v1}{bend left = 15};
+\rdfedge{v1}{\textbf{?emp2}}{emp2v1}{};
+\rdfedge{v1}{\textbf{?sal2}}{sal2v1}{bend right=15};
+
+
+\rdfnode{emp2v2}{e:D}{right= 1.5 of v2};
+\rdfnode{sal1v2}{\$2300}{above= 0.1 of emp2v2};
+\rdfnode{emp1v2}{e:G}{above= 0.1 of sal1v2};
+\rdfnode{jobv2}{Operator}{above= 0.1 of emp1v2};
+\rdfnode{sal2v2}{\$2000}{below= 0.1 of emp2v2};
+\rdfedge{v2}{\textbf{?job}}{jobv2}{pos=.7, bend left = 20};
+\rdfedge{v2}{\textbf{?emp1}}{emp1v2}{bend left = 10};
+\rdfedge{v2}{\textbf{?sal1}}{sal1v2}{};
+\rdfedge{v2}{\textbf{?emp2}}{emp2v2}{bend right =10};
+\rdfedge{v2}{\textbf{?sal2}}{sal2v2}{bend right =20};
+
+
+\rdfnode{emp1v3}{e:G}{right= 1.5 of v3};
+\rdfnode{jobv3}{Operator}{above= 0.1 of emp1v3};
+\rdfnode{sal1v3}{\$2300}{below= 0.1 of emp1v3};
+\rdfnode{emp2v3}{e:E}{below= 0.1 of sal1v3};
+\rdfnode{sal2v3}{\$2000}{below= 0.1 of emp2v3};
+\rdfedge{v3}{\textbf{?job}}{jobv3}{bend left = 20};
+\rdfedge{v3}{\textbf{?emp1}}{emp1v3}{bend left = 10};
+\rdfedge{v3}{\textbf{?sal1}}{sal1v3}{};
+\rdfedge{v3}{\textbf{?emp2}}{emp2v3}{bend right =10};
+\rdfedge{v3}{\textbf{?sal2}}{sal2v3}{bend right =20};
+
+
+\rdfnode{jobv4}{Operator}{right= of v4};
+\rdfnode{emp1v4}{e:G}{below= 0.1 of jobv4};
+\rdfnode{sal1v4}{\$2300}{below= 0.1 of emp1v4};
+\rdfnode{emp2v4}{e:F}{below= 0.1 of sal1v4};
+\rdfnode{sal2v4}{\$2000}{below= 0.1 of emp2v4};
+\rdfedge{v4}{\textbf{?job}}{jobv4}{bend left=15};
+\rdfedge{v4}{\textbf{?emp1}}{emp1v4}{};
+\rdfedge{v4}{\textbf{?sal1}}{sal1v4}{bend right = 15};
+\rdfedge{v4}{\textbf{?emp2}}{emp2v4}{bend right =30};
+\rdfedge{v4}{\textbf{?sal2}}{sal2v4}{bend right =45};
+
+
+\rdfedge{r}{\rec}{v1}{};
+\rdfedge{r}{\rec}{v2}{};
+\rdfedge{r}{\rec}{v3}{};
+\rdfedge{r}{\rec}{v4}{};
+\end{tikzpicture}

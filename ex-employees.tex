@@ -1,0 +1,66 @@
+\begin{tikzpicture}[level/.style={sibling distance=20mm/#1}]
+
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (0,0) (a) {\texttt{e:A}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (-3,-2) (b) {\texttt{e:B}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (3,-2) (c) {\texttt{e:C}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (-4.5,-4) (d) {\texttt{e:D}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (-3,-4) (e) {\texttt{e:E}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (-1.5,-4) (f) {\texttt{e:F}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (3,-4) (g) {\texttt{e:G}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (2.5,-5.5) (h) {\texttt{e:H}};
+\node[inner sep=5pt, draw, rectangle, rounded corners=5pt] at (3.75,-5.5) (i) {\texttt{e:I}};
+
+\draw [->, sloped, >=stealth] (b) to node [auto] {} (a);
+\draw [->, sloped, >=stealth] (c) to node [auto] {} (a);
+\draw [->, sloped, >=stealth] (d) to node [auto] {} (b);
+\draw [->, sloped, >=stealth] (e) to node [auto] {} (b);
+\draw [->, sloped, >=stealth] (f) to node [auto] {} (b);
+\draw [->, sloped, >=stealth] (g) to node [auto] {} (c);
+\draw [->, sloped, >=stealth] (h) to node [auto] {} (g);
+\draw [->, sloped, >=stealth] (i) to node [auto] {} (g);
+
+\node[anchor=west] at (1.5,0) (sa) {\texttt{\$10,000}};
+\node[anchor=east] at (-4.5,-2) (sb) {\texttt{\$4,450}};
+\node[anchor=west] at (4.5,-2) (sc) {\texttt{\$4,150}};
+\node at (-4.5,-5.5) (sd) {\texttt{\$2,000}};
+\node at (-3,-5.5) (se) {\texttt{\$2,000}};
+\node at (-1.5,-5.5) (sf) {\texttt{\$2,000}};
+\node[anchor=west] at (4.5,-4) (sg) {\texttt{\$2,300}};
+\node[anchor=east] at (1,-5.5) (sh) {\texttt{\$1,000}};
+\node[anchor=west] at (5.25,-5.5) (si) {\texttt{\$1,000}};
+
+\draw [->, >=stealth, dashed] (a) to node [auto] {} (sa);
+\draw [->, >=stealth, dashed] (b) to node [auto] {} (sb);
+\draw [->, >=stealth, dashed] (c) to node [auto] {} (sc);
+\draw [->, >=stealth, dashed] (d) to node [auto] {} (sd);
+\draw [->, >=stealth, dashed] (e) to node [auto] {} (se);
+\draw [->, >=stealth, dashed] (f) to node [auto] {} (sf);
+\draw [->, >=stealth, dashed] (g) to node [auto] {} (sg);
+\draw [->, >=stealth, dashed] (h) to node [auto] {} (sh);
+\draw [->, >=stealth, dashed] (i) to node [auto] {} (si);
+
+\node[anchor=east] at (-1.5,0) (ja) {\texttt{Director}};
+\node at (0,-1.5) (jbc) {\texttt{Manager}};
+% \node[anchor=west] at (4,-1.5) (jc) {\texttt{Manager}};
+\node at (0,-3) (jdefg) {\texttt{Operator}};
+% \node at (-2.5,-5.5) (je) {\texttt{Operator}};
+% \node at (-1,-5.5) (jf) {\texttt{Operator}};
+% \node[anchor=west] at (4,-3.5) (jg) {\texttt{Operator}};
+\node at (3,-7) (jhi) {\texttt{Trainee}};
+% \node[anchor=west] at (4.75,-5.5) (ji) {\texttt{Trainee}};
+
+\draw [->, >=stealth, dotted] (a) to node [auto] {} (ja);
+\draw [->, >=stealth, dotted] (b) to node [auto] {} (jbc);
+\draw [->, >=stealth, dotted] (c) to node [auto] {} (jbc);
+\draw [->, >=stealth, dotted] (d) to node [auto] {} (jdefg);
+\draw [->, >=stealth, dotted] (e) to node [auto] {} (jdefg);
+\draw [->, >=stealth, dotted] (f) to node [auto] {} (jdefg);
+\draw [->, >=stealth, dotted] (g) to node [auto] {} (jdefg);
+\draw [->, >=stealth, dotted] (h) to node [auto] {} (jhi);
+\draw [->, >=stealth, dotted] (i) to node [auto] {} (jhi);
+
+\draw [->, >=stealth, dotted] (-5,-7) to node [auto] {\texttt{job}} (-3.75,-7);
+\draw [->, >=stealth, dashed] (-3.5,-7) to node [auto] {\texttt{salary}} (-2.25,-7);
+\draw [->, sloped, >=stealth] (-2,-7) to node [auto] {\texttt{boss}} (-0.75,-7);
+
+\end{tikzpicture}

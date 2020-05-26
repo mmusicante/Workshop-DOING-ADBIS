@@ -1,0 +1,196 @@
+% use this file to include packages and create macros
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{subcaption}
+\usepackage{framed}
+\usepackage{amsfonts,amsmath}
+%\usepackage{amsfonts,amssymb,amsmath,amsthm}
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily, numbers=left, numbersep=5pt, numberstyle=\tiny, stepnumber=1, escapechar=\!, columns=fullflexible, morekeywords={true, false, a, @prefix}}
+
+\usepackage{booktabs} % For formal tables
+
+\usepackage{tikz, tabularx} % for drawing
+\usetikzlibrary{patterns}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning, arrows}  % use: above left of, etc
+% tikz macros
+\newcounter{c}
+\newcounter{head}
+\newcounter{tail}
+
+\newcommand{\Symbol}[4]{
+    \node at (#1,#2) [draw, circle] (#3) {#4};
+}
+
+\newcommand{\Nodeset}[5]{
+    \setcounter{c}{0}
+    \foreach \v in {#4} {
+        \node (#1-\thec) [draw] at (#2, -{\thec/2+#3}) {$\v$};
+        \setcounter{tail}{\thec}
+        \stepcounter{c}
+    }
+    
+    \ifnum \thec=0%
+        \node (#1-\thec) [draw, dashed, minimum width=.45cm] at (#2, -{\thec/2+#3}) {};
+        \setcounter{tail}{\thec}
+        \stepcounter{c}
+    \fi
+    
+    \stepcounter{c}
+    \setcounter{head}{\thec}
+    
+    \foreach \v in {#5} {
+        \node (#1-\thec) [draw] at (#2, -{\thec/2+#3}) {$\v$};
+        \stepcounter{c}
+    }
+
+    \ifnum \thec=\thehead
+        \node (#1-\thehead) [draw, dashed] at (#2, -{\thec/2+#3}) {};
+    \fi
+    
+    \draw[->, >=stealth] (#1-\thehead) to (#1-\thetail);
+}
+
+\usepackage{hyperref} % for links
+\usepackage{amsmath}
+
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e} % For algorithms
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+% math symbols
+\newcommand{\ldb}{\mathopen{\lbrack\!\lbrack}}
+\newcommand{\rdb}{\mathclose{\rbrack\!\rbrack}}
+\newcommand{\derives}{\Rightarrow^*}
+\newcommand{\T}{\mathit{traces}}
+\def\bigO{\hbox{$\mathcal {O}$}}
+%\newcommand{\tuple}[1]{( #1 )}
+\newcommand{\set}[1]{\{ #1 \} }
+\newcommand{\pr}[2]{#1 \rightarrow #2}
+\newcommand{\Rule}[2]{#1 \to #2}
+\newcommand{\R}[2]{\ensuremath{R(\mathit{#1},\mathit{#2}})}
+\newcommand{\rules}{P}
+\newcommand{\nonterminals}{N}
+\newcommand{\terminals}{\ensuremath{\Sigma}}
+\newcommand{\observers}{O}
+\newcommand{\nil}{\textbf{nil}}
+\newcommand{\ttable}{T_G}
+\newcommand{\res}{\textit{res}}
+\newcommand{\resm}{\res^\bullet}
+\newcommand{\resu}{\res^\circ}
+\newcommand{\vis}{\textit{vis}}
+\newcommand{\vism}{\vis^\bullet}
+\newcommand{\visu}{\vis^\circ}
+\newcommand{\sta}{\textit{dscr\/}}
+\newcommand{\stam}{\sta^\bullet}
+\newcommand{\stau}{\sta^\circ}
+\newcommand{\m}{^\bullet}
+\renewcommand{\u}{^\circ}
+
+% SPARQL commands
+\newcommand{\SELECT}{\texttt{SELECT}}
+\newcommand{\WHERE}{\texttt{WHERE}}
+\newcommand{\AND}{\texttt{.}} % the 'AND' in SPARQL is actually a dot '.' -- ciro
+\newcommand{\OPT}{\texttt{OPT}}
+\newcommand{\OR}{\texttt{OR}}
+\newcommand{\USING}{\texttt{USING}}
+\newcommand{\FROM}{\texttt{FROM}}
+\newcommand{\FILTER}{\texttt{FILTER}}
+\newcommand{\var}[1]{\texttt{?#1}}
+\newcommand{\inv}[1]{\overline{#1}} % 
+%\newcommand{\inv}[1]{\char`\^\!#1} % SPARQL's inverse operator is '^' and it comes before the predicate
+
+%\newcommand{\rep}[3]{#1 \ensuremath{\sim\!\! >} #2 \ensuremath{<\!\!\sim} #3}
+
+\newcommand{\rep}[3]{\texttt{<}#1\texttt{>}#2\texttt{<}#3\texttt{>}}
+
+% For drawing RDF graphs
+\newcommand{\rdfedge}[4]{\draw [->, sloped, >=stealth, above, #4] (#1) to node {\texttt{#2}} (#3);}
+\newcommand{\rdfnode}[3]{\node[draw, #3] (#1)
+{\texttt{#2}};}
+\newcommand{\rdfproperty}[5]{\node[minimum width=0, minimum height=0, #4 of #1] (#1-#2)
+{\texttt{#3}};\rdfedge{#1}{#2}{#1-#2}{#5};}
+\newcommand{\rdfloop}[3]{\path (#1) edge [loop #2,->, >=stealth, thick,red] node {#2}  (#1);}
+
+
+%\newtheorem{theorem}{Theorem}
+%\providecommand\definitionautorefname{Theorem}
+
+% \newtheorem{lemma}{Lemma}
+% \providecommand\definitionautorefname{Lemma}
+
+% \newtheorem{corollary}{Corollary}
+% \providecommand\definitionautorefname{Corollary}
+
+% \newtheorem{definition}{Definition}
+% \providecommand\definitionautorefname{Definition}
+
+\newtheorem{grammar}{Grammar}
+\providecommand\grammarautorefname{Grammar}
+
+\usepackage{newfloat} % For query environment
+\DeclareFloatingEnvironment[fileext=frm,placement={!ht},name=Query]{query}
+% \captionsetup[query]{labelfont=bf}
+
+\newcounter{numberInTrivlist}
+
+\newenvironment{numtrivlist}{\begin{list}
+          {\rm \arabic{numberInTrivlist})}
+          {\usecounter{numberInTrivlist}
+          \setlength{\leftmargin}{0pt}
+          \setlength{\rightmargin}{0pt}
+          \setlength{\itemindent}{12pt}
+          \setlength{\listparindent}{0pt}}}
+                            {\end{list}}
+
+\newenvironment{itemizedTrivlist}{\begin{list}
+          {\rm ~\hspace{2mm} $\bullet$\ } 
+          {\setlength{\leftmargin}{0pt}
+          \setlength{\rightmargin}{0pt}
+          \setlength{\itemindent}{12pt}
+          \setlength{\listparindent}{0pt}}}
+                            {\end{list}}
+
+\newcounter{inlineenum}
+% \renewcommand{\theinlineenum}{\alph{inlineenum}}
+\newenvironment{inlineenum}
+  {\unskip\ignorespaces\setcounter{inlineenum}{0}%
+   \renewcommand{\item}{\refstepcounter{inlineenum}{(\theinlineenum)~}}}
+  {\ignorespacesafterend}
+
+
+%article macros: rules to translation and reduction
+\newcommand{\sem}[1]{[ \! [ #1 ] \! ]}
+\newcommand{\guard}[1]{[ #1 ]}
+\newcommand{\tuple}[1]{\langle #1 \rangle}
+\newcommand{\trad}[1]{{\cal T}\sem{ #1 }}
+\newcommand{\setof}[1]{\{ #1 \} }
+\newcommand{\eval}[2]{\mathit{Eval}_{#1}(#2)}
+\def\vertices{{\cal V}}
+%\def\tr{\rhd}    % transition relation
+\def\tr{\rightarrow}    % transition relation
+\newcommand{\fpfrule}[2]{{{{\displaystyle #1}\over{\displaystyle #2}}}}
+\newcommand{\pfrule}[2]{\begin{array}{c} #1 \\ \hline #2 \end{array}}
+\newcommand{\pfruleN}[3]{\begin{array}[b]{c} #1 \\ \hline #3 \end{array} \ (#2)}
+%my macros
+%\newcommand{\set}[1]{\lbrace #1 \rbrace}
+
+\newcommand{\rec}{\texttt{rec}}
+
+
+
+
+% comments
+\usepackage{ulem}
+\normalem
+\newcommand{\ourremark}[3]{\noindent{{\footnotesize\sffamily\textcolor{#2}{#3\textsuperscript{#1}}}}}
+\newcommand{\mm}[1]{\ourremark{\tiny Martin}{red}{#1}}
+\newcommand{\ciro}[1]{\ourremark{\tiny Ciro}{blue}{#1}}
+\newcommand{\gsv}[1]{\ourremark{\tiny Semyon}{orange}{#1}}
+\newcommand{\umberto}[1]{\ourremark{\tiny Umberto}{purple}{#1}}
+
+%\hypersetup{draft}
+
+\pgfplotsset{compat=1.14}
